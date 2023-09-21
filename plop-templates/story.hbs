@@ -1,0 +1,13 @@
+import { ComponentStory, ComponentMeta } from '@storybook/react';
+import {{pascalCase name}} from './index';
+
+export default {
+  title: 'Formalhaut/{{story}}/{{pascalCase name}}',
+  component: {{pascalCase name}},
+  argTypes: {},
+} as ComponentMeta<typeof {{pascalCase name}}>;
+
+const Template: ComponentStory<typeof {{pascalCase name}}> = (args) => <{{pascalCase name}} {...args} />;
+
+export const Default = Template.bind({});
+Default.args = {};

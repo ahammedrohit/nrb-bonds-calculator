@@ -1,0 +1,46 @@
+@media all {
+  .page-break {
+    display: none;
+  }
+}
+
+@media print {
+  html,
+  body {
+    height: initial !important;
+    overflow: initial !important;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+@media print {
+  .page-break {
+    margin-top: 1rem;
+    display: block;
+    page-break-before: auto;
+    page-break-after:always;
+    page-break-inside: avoid;
+  }
+
+  .avoid {
+    page-break-inside: avoid;
+    display: table;
+    width: 100%;
+  }
+}
+
+
+@page {
+  size: auto;
+  margin: 10mm 5mm 0 5mm;
+}
+
+.printtopdf {
+  display: none;
+}
+
+@media print {
+  .printtopdf {
+    display: block;
+  }
+}

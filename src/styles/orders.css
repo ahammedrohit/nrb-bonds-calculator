@@ -1,0 +1,21 @@
+.import-form {
+    margin-bottom: 55px;
+}
+
+.orders-data {
+    height: 93%;
+}
+
+.orders-contents {
+    height: 640px;
+}
+
+.orders-footer {
+    position: fixed;
+    bottom: 0px;
+    background-color: #fff;
+    width: 100%;
+    right: 0%;
+    border: 1px solid rgb(229 231 235 / 1);
+    justify-content: end;
+}

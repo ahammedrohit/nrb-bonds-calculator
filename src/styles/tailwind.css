@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .btn-white {
+        @apply text-gray-900 bg-white hover:bg-gray-100 border border-gray-200 focus:ring-2 focus:outline-none focus:ring-gray-100 font-medium rounded text-sm py-1 px-2.5 text-center inline-flex items-center
+    }
+    .nested-select-label {
+        @apply py-1.5 px-4 absolute top-0 left-0 h-full w-24 flex-shrink-0 inline-flex items-center text-sm font-medium text-center border-r border-gray-200 rounded-l
+    }
+    .nested-select-options {
+        @apply pl-32 form-select rounded focus:ring-blue-500 focus:border-blue-500 block w-full
+    }
+    .border-medium {
+        @apply border border-gray-300
+    }
+    .primary-text-color {
+        @apply text-gray-700
+    }
+
+    .form-select {
+        @apply bg-gray-50
+    }
+
+    .form-input {
+        @apply bg-gray-50
+    }
+
+    .form-radio {
+        @apply bg-gray-50
+    }
+    .label-badge {
+        @apply text-xs font-semibold px-5 py-2
+    }
+    .fill-available {
+        height: -webkit-fill-available;
+    }
+    .fill-inherit {
+        height: inherit;
+    }
+  }

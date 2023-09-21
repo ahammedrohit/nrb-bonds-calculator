@@ -1,0 +1,71 @@
+.form-input:disabled,
+.form-select:disabled,
+.form-checkbox:disabled,
+.form-radio:disabled,
+.form-input:disabled {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.picking-select-product {
+  border-left: 5px solid #009ccc;
+  position: relative;
+}
+
+.triangle {
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 35px 0 35px 20px;
+  border-color: transparent transparent transparent #009CCC;
+  margin-right: -35px;
+}
+
+.no-transform {
+  transform: none;
+}
+
+.rc_range_start .rc_body-cell_value {
+  background-color: #06b6d4 !important;
+}
+
+.rc_range_end .rc_body-cell_value {
+  background-color: #d946ef !important;
+}
+
+.start {
+  background-color: #06b6d4;
+}
+
+.end {
+  background-color: #d946ef;
+}
+
+.z-999 {
+  z-index: 999;
+}
+
+.h-fit {
+  height: calc((100vh - 191px) / 2);
+}
+
+.h-screen-fit {
+  height: calc(100vh - 130px);
+}
+
+
+.accordion {
+  background-color: rgb(63 63 70);
+  color: rgb(255 255 255);
+  cursor: pointer;
+  padding: 5px;
+  width: 36px;
+  height: 36px;
+  position: absolute;
+  right: 0;
+  text-align: center;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+  z-index: 10;
+}
+
