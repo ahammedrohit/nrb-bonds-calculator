@@ -1,4 +1,4 @@
-import { ParsedErrorMessageProps, RawErrorMessageProps } from "@src/interfaces/ErrorMessage";
+import { ParsedErrorMessageProps, RawErrorMessageProps } from "@/interfaces/ErrorMessage";
 
 export function parseErrorMessage(err: RawErrorMessageProps): ParsedErrorMessageProps {
     const res: ParsedErrorMessageProps = { status: 400, message: "" };

@@ -1,21 +1,20 @@
 import { DisplayTiles } from "@/components/DisplayTiles/DisplayTiles";
 import { isPositiveInteger, toPositiveInteger } from "@/helpers/isPositiveInteger";
+import { ReturnProps } from "@/interfaces/DisplayTiles";
 import NavLayout from "@/layouts/NavLayout";
-import { IconCircleMinus, IconCirclePlus } from "@tabler/icons-react";
 import { useState } from "react";
+import { CircleMinus, CirclePlus } from 'tabler-icons-react';
 
 interface MainProps { }
+
+const predefinedAmounts = [25000, 50000, 100000, 200000, 500000, 1000000, 5000000];
 
 export const Main = ({ ...props }: MainProps) => {
 
     const [investAmount, setInvestAmount] = useState("");
-    const [returns, setReturns] = useState({
-        "7": 0,
-        "13": 0,
-        "19": 0,
-        "25": 0,
-        "61": 0,
-    })
+
+    const [returns, setReturns] = useState<ReturnProps | undefined>()
+    const [buttonClickCounts, setButtonClickCounts] = useState(Array(predefinedAmounts.length).fill(0));
 
     const calculateBondReturns = (amount: number, months: number) => {
         let interestRate = 0;
@@ -74,24 +73,41 @@ export const Main = ({ ...props }: MainProps) => {
         return returns;
     }
 
-    const getReturns = (amount : string) => {
-        if(isPositiveInteger(amount)){
+    const getReturns = (amount: string) => {
+        if (isPositiveInteger(amount)) {
             setInvestAmount(amount);
-            const data = {
-                "7": calculateBondReturns(toPositiveInteger(amount), 7),
-                "13": calculateBondReturns(toPositiveInteger(amount), 13),
-                "19": calculateBondReturns(toPositiveInteger(amount), 19),
-                "25": calculateBondReturns(toPositiveInteger(amount), 25),
-                "61": calculateBondReturns(toPositiveInteger(amount), 61),
+            const data: ReturnProps = {
+                six: calculateBondReturns(toPositiveInteger(amount), 7),
+                twelve: calculateBondReturns(toPositiveInteger(amount), 13),
+                eighteen: calculateBondReturns(toPositiveInteger(amount), 19),
+                twentyfour: calculateBondReturns(toPositiveInteger(amount), 25),
+                matured: calculateBondReturns(toPositiveInteger(amount), 61),
             }
-            console.log(data)
             setReturns(data);
-        }else{
+        } else {
             setInvestAmount("");
             return;
         }
-
     }
+
+    const handleAmountChange = (amount: number, index: number, indexCount?: string) => {
+        const sum = Number(investAmount) + amount;
+
+        if (indexCount !== 'minus' || buttonClickCounts[index] > 0) {
+            getReturns(String(sum));
+        }
+        const updatedButtonClickCounts = buttonClickCounts.map((count, i) => {
+            if (i === index) {
+                if (indexCount === 'plus') {
+                    return count + 1;
+                } else if (indexCount === 'minus') {
+                    return count - 1 >= 0 ? count - 1 : 0;
+                }
+            }
+            return count;
+        });
+        setButtonClickCounts(updatedButtonClickCounts);
+    };
 
 
 
@@ -118,42 +134,65 @@ export const Main = ({ ...props }: MainProps) => {
                         </div>
                     </div>
 
+                    <div className="flex items-center justify-center text-sm space-x-5 mb-5">
+                        {predefinedAmounts.map((amount, index) => (
+                            <div key={index} aria-label={`Amount ${new Intl.NumberFormat().format(amount)}`}>
+                                <div className="flex flex-col">
+                                    <button
+                                        type="button"
+                                        className="btn btn-dark btn-sm opacity-75"
+                                        onClick={() => handleAmountChange(amount, index, "plus")}
+                                    >
+                                        <div className="flex items-center justify-center">
+                                            <CirclePlus />
+                                        </div>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-dark btn-md w-28"
+                                        onClick={() => handleAmountChange(amount, index, "plus")}
+                                    >
+                                        {new Intl.NumberFormat().format(amount)}
+                                        <sup>{buttonClickCounts[index] ? `+ ${buttonClickCounts[index]}` : ''}</sup>
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-dark btn-sm opacity-75"
+                                        onClick={() => handleAmountChange(-amount, index, "minus")}
+                                    >
+                                        <div className="flex items-center justify-center">
+                                            <CircleMinus />
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+
 
                     <div className="flex items-center justify-center text-sm space-x-5">
                         <div>
-                            <label className="font-semibold mb-2 flex items-center justify-center">Invest Amount : </label>
+                            <label className="font-semibold mb-2 flex items-center justify-center">{`Invest Amount : `}</label>
                             <div className="flex items-center space-x-2">
-                                <button
-                                    className="ml-1 cursor-pointer w-auto btn p-1 rounded-lg"
-                                >
-                                    <IconCircleMinus />
-                                </button>
 
                                 <input
                                     className="form-input form-input-md"
-                                    // style={{ width: "10.5rem" }}
                                     id="corporate_code"
                                     type="string"
                                     autoComplete="off"
-                                value={investAmount}
-                                onChange={(e) => {
-                                    getReturns(e.target.value)
-                                }}
+                                    value={investAmount}
                                 />
-                                <button
-                                    className="ml-1 cursor-pointer w-auto btn p-1 rounded-lg"
-                                >
-                                    <IconCirclePlus />
-                                </button>
                             </div>
                         </div>
                     </div>
 
-                    <DisplayTiles />
-
+                    <DisplayTiles
+                        returns={returns}
+                        investAmount={investAmount}
+                    />
 
                 </div>
-
             </div>
         </NavLayout>
     )

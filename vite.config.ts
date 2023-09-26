@@ -33,7 +33,6 @@ export default defineConfig(({ mode }) => {
           manualChunks: {
             vendor: ['react', 'react-router-dom', 'react-dom'],
             icons: ['tabler-icons-react'],
-            calender: ['@natscale/react-calendar'],
             headlessui: ['@headlessui-float/react', '@headlessui/react'],
             query: ['@tanstack/react-query']
           }
