@@ -13,7 +13,7 @@ export const NavLayout = ({ nav = true, ...props }: NavLayoutProps) => {
   return (
     <div>
       <Helmet>
-        <title>{`FMH ${props.title ? " | " + props.title : ""}`}</title>
+        <title>{`Kwaski.tech ${props.title ? " | " + props.title : ""}`}</title>
       </Helmet>
       <div className="flex flex-col bg-slate-100">
         {nav && <Navbar title={props.title} />}
