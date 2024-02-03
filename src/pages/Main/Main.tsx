@@ -126,7 +126,7 @@ export const Main = ({ ...props }: MainProps) => {
                     <div className="flex justify-center items-center p-5 text-lg mx-20">
                         <div className="grid grid-rows-2 items-center justify-center">
                             <p className="text-red-500 font-semibold">
-                                Bangladesh Bank's 5-Year Wage Earner Development Bond Pays Up to 12% Dividend to Expatriate Bangladeshis!
+                                Bangladesh Bank's 5-Year Wage Earner Development Bond Pays Up to 12% Dividend to Expatriate Bangladeshis!!!
                             </p>
                             <p className="flex items-center justify-center">
                                 Use this calculator to calculate your return on investment.

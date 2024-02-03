@@ -1,30 +1,42 @@
+name: Deploy to S3
+
 on:
   push:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::146562929581:role/github-actions-role
+          aws-region: ${{ secrets.S3_BUCKET_REGION }}
 
       - name: Install dependencies
         run: npm install
 
-      - name: Build project
+      - name: Build
         run: npm run build
 
       - name: Deploy to S3
-        uses: jakejarvis/s3-sync-action@v6
-        with:
-          source: "dist/"
-          bucket: "${{ secrets.S3_BUCKET_NAME }}"
-          region: "${{ secrets.S3_BUCKET_REGION }}"
-          access_key_id: "${{ secrets.AWS_ACCESS_KEY_ID }}"
-          secret_access_key: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+        run: aws s3 sync dist ${{ secrets.S3_BUCKET_NAME}} --acl public-read
 
-      - name: Invalidate CloudFront cache (Optional)
-        uses: reggionick/invalidate-cloudfront-cache@v3
-        with:
-          distribution-id: "${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}"
-          paths: "/*"
+    #   - name: Invalidate CloudFront
+    #     uses: chetan/invalidate-cloudfront-action@v2
+    #     env:
+    #         DISTRIBUTION: ${{ secrets.DISTRIBUTION }}
+    #         PATHS: "/index.html"
+    #         AWS_REGION: ${{ secrets.S3_BUCKET_REGION }}
+    #         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+    #         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
