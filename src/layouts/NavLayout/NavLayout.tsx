@@ -15,10 +15,12 @@ export const NavLayout = ({ nav = true, ...props }: NavLayoutProps) => {
       <Helmet>
         <title>{`Kwaski.tech ${props.title ? " | " + props.title : ""}`}</title>
       </Helmet>
-      <div className="flex flex-col bg-slate-100">
-        {nav && <Navbar title={props.title} />}
-        <div>
-          {props.children}
+      <div>
+        <div className="flex flex-col bg-slate-100">
+          {nav && <Navbar title={props.title} />}
+          <div>
+            {props.children}
+          </div>
         </div>
       </div>
     </div>

@@ -109,23 +109,21 @@ export const Main = ({ ...props }: MainProps) => {
         setButtonClickCounts(updatedButtonClickCounts);
     };
 
-
-
     return (
         <NavLayout title="Main">
-            <div className="py-2 primary-text-color h-full min-h-screen bg-gray-100">
+            <div className="py-2 primary-text-color h-full bg-gray-100 w-full " >
 
-                <div className="mx-36 py-5 bg-white h-full rounded-md shadow-sm">
+                <div className="lg:mx-36 md:py-5 bg-white h-full rounded-md shadow-sm">
 
-                    <div className="grid grid-rows-2 items-center justify-center font-semibold gap-3 ">
-                        <p className="inline-flex items-center justify-center text-5xl">Bangladesh Diaspora Bond Calculator</p>
-                        <p className="inline-flex justify-center text-2xl">Calculate Your US Dollar Investment and Savings Returns</p>
+                    <div className="md:grid grid-rows-2 items-center justify-center font-semibold md:gap-3 pt-2 px-2">
+                        <p className="lg:text-5xl text-xl text-center px-2">Bangladesh Diaspora Bond Calculator</p>
+                        <p className="lg:text-2xl text-lg text-center px-2">Calculate Your US Dollar Investment and Savings Returns</p>
                     </div>
-                    <div className="border-b-2 border-gray-300 mx-20 pt-2"></div>
+                    <div className="border-b-2 border-gray-300 lg:mx-10 mx-5 pt-2"></div>
 
-                    <div className="flex justify-center items-center p-5 text-lg mx-20">
+                    <div className="flex justify-center items-center text-lg mx-auto text-center py-2 lg:py-5 lg:text-2xl">
                         <div className="grid grid-rows-2 items-center justify-center">
-                            <p className="text-red-500 font-semibold">
+                            <p className="text-red-500 font-semibold px-2">
                                 Bangladesh Bank's 5-Year Wage Earner Development Bond Pays Up to 12% Dividend to Expatriate Bangladeshis!!!
                             </p>
                             <p className="flex items-center justify-center">
@@ -134,13 +132,13 @@ export const Main = ({ ...props }: MainProps) => {
                         </div>
                     </div>
 
-                    <div className="flex items-center justify-center text-sm space-x-5 mb-5">
+                    <div className="grid grid-cols-3 gap-2 px-5 md:mb-5 md:flex md:items-center md:justify-center md:text-sm md:space-x-5 mb-3">
                         {predefinedAmounts.map((amount, index) => (
-                            <div key={index} aria-label={`Amount ${new Intl.NumberFormat().format(amount)}`}>
+                            <div key={index} >
                                 <div className="flex flex-col">
                                     <button
                                         type="button"
-                                        className="btn btn-dark btn-sm opacity-75"
+                                        className="hidden md:block btn btn-dark btn-sm opacity-75"
                                         onClick={() => handleAmountChange(amount, index, "plus")}
                                     >
                                         <div className="flex items-center justify-center">
@@ -157,7 +155,7 @@ export const Main = ({ ...props }: MainProps) => {
                                     </button>
                                     <button
                                         type="button"
-                                        className="btn btn-dark btn-sm opacity-75"
+                                        className="hidden md:block btn btn-dark btn-sm opacity-75"
                                         onClick={() => handleAmountChange(-amount, index, "minus")}
                                     >
                                         <div className="flex items-center justify-center">
@@ -167,22 +165,24 @@ export const Main = ({ ...props }: MainProps) => {
                                 </div>
                             </div>
                         ))}
+                        <button
+                            type="button"
+                            className="md:hidden btn bg-orange-700 text-white btn-sm w-28"
+                            onClick={() => {
+                                setInvestAmount("");
+                                setReturns(undefined);
+                                setButtonClickCounts(Array(predefinedAmounts.length).fill(0));
+                            }}
+                        >
+                            Clear
+                        </button>
                     </div>
-
-
 
                     <div className="flex items-center justify-center text-sm space-x-5">
                         <div>
                             <label className="font-semibold mb-2 flex items-center justify-center">{`Invest Amount : `}</label>
                             <div className="flex items-center space-x-2">
-
-                                <input
-                                    className="form-input form-input-md"
-                                    id="corporate_code"
-                                    type="string"
-                                    autoComplete="off"
-                                    value={investAmount}
-                                />
+                                <div className="form-input form-input-md w-64">{investAmount} {investAmount ? `৳` : ``}</div>
                             </div>
                         </div>
                     </div>
