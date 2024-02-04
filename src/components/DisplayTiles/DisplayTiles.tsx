@@ -2,10 +2,10 @@ import { ReturnProps } from "@/interfaces/DisplayTiles";
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
-import 'src/styles/style.css';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import { Navigation } from 'swiper/modules';
+import 'src/styles/swiper.css';
 
 interface DisplayTilesProps {
     returns: ReturnProps | undefined;
@@ -28,10 +28,10 @@ export const DisplayTiles = ({ returns, investAmount, ...props }: DisplayTilesPr
             {/* mobile */}
             <div className="md:hidden">
                 <Swiper
-                    navigation={true} modules={[Navigation]} 
+                    navigation={true} modules={[Navigation]}
                 >
                     <SwiperSlide>
-                        <div className=" bg-yellow-300  h-72 rounded-lg hover:shadow-md">
+                        <div className=" bg-orange-300  h-72 rounded-lg hover:shadow-md">
                             <label className="flex items-center justify-center font-semibold bg-gray-600 text-white rounded h-10" title="After 6 months but not later than 12 months.">{`Returns : 6 months later`}</label>
                             <div className="grid grid-rows-4 gap-5 py-8 px-5">
                                 <div className="flex items-center justify-center ">
@@ -282,7 +282,7 @@ export const DisplayTiles = ({ returns, investAmount, ...props }: DisplayTilesPr
             {/* desktop */}
             <div className="hidden md:flex items-center justify-center px-5 my-5 gap-5">
 
-                <div className=" bg-yellow-300  h-72 rounded-lg hover:shadow-md">
+                <div className=" bg-orange-300  h-72 rounded-lg hover:shadow-md">
                     <label className="flex items-center justify-center font-semibold bg-gray-600 text-white rounded h-10" title="After 6 months but not later than 12 months.">{`Returns : 6 months later`}</label>
                     <div className="grid grid-rows-4 gap-5 py-8 px-5">
                         <div className="flex items-center justify-center ">

@@ -180,7 +180,7 @@ export const Main = ({ ...props }: MainProps) => {
 
                     <div className="flex items-center justify-center text-sm space-x-5">
                         <div>
-                            <label className="font-semibold mb-2 flex items-center justify-center">{`Invest Amount : `}</label>
+                            <label className="font-semibold flex items-center justify-center">{`Invest Amount : `}</label>
                             <div className="flex items-center space-x-2">
                                 <div className="form-input form-input-md w-64">{investAmount} {investAmount ? `৳` : ``}</div>
                             </div>
@@ -192,7 +192,13 @@ export const Main = ({ ...props }: MainProps) => {
                         investAmount={investAmount}
                     />
 
+                    <p className="text-center italic hover:text-blue-600 pb-3">
+                        <a href="https://www.bb.org.bd/en/index.php/Investfacility/nrbbond" target="_blank" rel="noreferrer" className="underline">Read more about the Bangladesh Diaspora Bonds.</a>
+                    </p>
+
                 </div>
+
+
             </div>
         </NavLayout>
     )
