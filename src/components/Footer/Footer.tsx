@@ -30,6 +30,11 @@ export const Footer = () => {
                 </NavLink>
               </li>
               <li>
+                <NavLink to="/about" className="text-sm hover:text-white transition-colors">
+                  About NRB Bonds
+                </NavLink>
+              </li>
+              <li>
                 <NavLink to="/bonds" className="text-sm hover:text-white transition-colors">
                   Bond Types
                 </NavLink>
@@ -37,6 +42,11 @@ export const Footer = () => {
               <li>
                 <NavLink to="/guidelines" className="text-sm hover:text-white transition-colors">
                   Investment Guide
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/glossary" className="text-sm hover:text-white transition-colors">
+                  Glossary
                 </NavLink>
               </li>
               <li>

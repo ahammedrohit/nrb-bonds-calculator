@@ -8,8 +8,10 @@ interface HeaderProps {
 
 const navigation = [
   { name: 'Calculator', href: '/' },
+  { name: 'About', href: '/about' },
   { name: 'Bond Types', href: '/bonds' },
   { name: 'Guidelines', href: '/guidelines' },
+  { name: 'Glossary', href: '/glossary' },
   { name: 'FAQ', href: '/faq' },
 ];
 
@@ -37,17 +39,8 @@ const ThemeToggle = () => {
 };
 
 export const Header = ({ }: HeaderProps) => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   useEffect(() => {
     setMobileMenuOpen(false);
@@ -55,11 +48,7 @@ export const Header = ({ }: HeaderProps) => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/80 dark:bg-neutral-900/80 backdrop-blur-xl border-b border-neutral-200/50 dark:border-neutral-800/50 shadow-sm'
-          : 'bg-transparent'
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white dark:bg-neutral-900 backdrop-blur-xl border-b border-neutral-200/50 dark:border-neutral-800/50 shadow-sm"
     >
       <nav className="container-wide">
         <div className="flex items-center justify-between h-16 md:h-18">

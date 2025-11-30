@@ -81,6 +81,18 @@
   .badge-info {
     @apply bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-200/50 dark:border-blue-800/50;
   }
+
+  .badge-brand {
+    @apply bg-brand-50 dark:bg-brand-950 text-brand-700 dark:text-brand-300 border border-brand-200/50 dark:border-brand-800/50;
+  }
+
+  .badge-blue {
+    @apply bg-blue-50 dark:bg-blue-950 text-blue-700 dark:text-blue-300 border border-blue-200/50 dark:border-blue-800/50;
+  }
+
+  .badge-purple {
+    @apply bg-purple-50 dark:bg-purple-950 text-purple-700 dark:text-purple-300 border border-purple-200/50 dark:border-purple-800/50;
+  }
   
   /* Typography */
   .heading-1 {
@@ -217,5 +229,22 @@
   /* Text gradients */
   .text-gradient {
     @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-600 to-brand-500;
+  }
+  
+  /* Animation for tooltips */
+  .animate-fade-in {
+    animation: fadeIn 0.2s ease-out;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
   }
 }
