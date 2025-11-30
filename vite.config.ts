@@ -1,11 +1,10 @@
 // / <reference types="vitest" />
 /// <reference types="vite/client" />
 import react from '@vitejs/plugin-react';
-import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(() => {
   return {
     define: {
       global: {}
@@ -32,20 +31,10 @@ export default defineConfig(({ mode }) => {
         output: {
           manualChunks: {
             vendor: ['react', 'react-router-dom', 'react-dom'],
-            icons: ['tabler-icons-react'],
             headlessui: ['@headlessui-float/react', '@headlessui/react'],
             query: ['@tanstack/react-query']
           }
         },
-        plugins: [
-          mode === 'analyze' &&
-          visualizer({
-            open: true,
-            filename: 'dist/stats.html',
-            gzipSize: true,
-            brotliSize: true,
-          }),
-        ],
       },
     },
   };
