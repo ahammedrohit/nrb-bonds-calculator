@@ -133,7 +133,7 @@ export const BondCalculator = ({ defaultBondType = 'WEDB' }: BondCalculatorProps
     <div className="card p-6 md:p-8">
       {/* Bond Type Selector */}
       <div className="mb-8">
-        <label className="block text-sm font-medium text-neutral-700 mb-3">
+        <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-3">
           Select Bond Type
         </label>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
@@ -149,16 +149,16 @@ export const BondCalculator = ({ defaultBondType = 'WEDB' }: BondCalculatorProps
                 }}
                 className={`relative p-4 rounded-xl border-2 text-left transition-all duration-200 ${
                   isSelected
-                    ? 'border-brand-500 bg-brand-50'
-                    : 'border-neutral-200 hover:border-neutral-300 bg-white'
+                    ? 'border-brand-500 bg-brand-50 dark:bg-brand-950/50'
+                    : 'border-neutral-200 dark:border-neutral-700 hover:border-neutral-300 dark:hover:border-neutral-600 bg-white dark:bg-neutral-800'
                 }`}
               >
                 <div className="flex items-start justify-between">
                   <div>
-                    <span className="text-xs font-semibold text-neutral-500 uppercase tracking-wider">
+                    <span className="text-xs font-semibold text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
                       {bondType}
                     </span>
-                    <h3 className="font-semibold text-neutral-900 mt-1 text-sm leading-tight">
+                    <h3 className="font-semibold text-neutral-900 dark:text-white mt-1 text-sm leading-tight">
                       {bond.name}
                     </h3>
                   </div>
@@ -169,10 +169,10 @@ export const BondCalculator = ({ defaultBondType = 'WEDB' }: BondCalculatorProps
                   </span>
                 </div>
                 <div className="mt-3 flex items-baseline gap-2">
-                  <span className="text-2xl font-display font-bold text-brand-600">
+                  <span className="text-2xl font-display font-bold text-brand-600 dark:text-brand-400">
                     {bond.interestRate}%
                   </span>
-                  <span className="text-xs text-neutral-500">
+                  <span className="text-xs text-neutral-500 dark:text-neutral-400">
                     / {bond.tenure} {bond.tenure === 1 ? 'year' : 'years'}
                   </span>
                 </div>
@@ -184,11 +184,11 @@ export const BondCalculator = ({ defaultBondType = 'WEDB' }: BondCalculatorProps
 
       {/* Investment Amount Input */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-neutral-700 mb-3">
+        <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-3">
           Investment Amount ({bondInfo.currency})
         </label>
         <div className="relative">
-          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 font-medium">
+          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-neutral-500 font-medium">
             {bondInfo.currency === 'USD' ? '$' : '৳'}
           </span>
           <input
@@ -201,7 +201,7 @@ export const BondCalculator = ({ defaultBondType = 'WEDB' }: BondCalculatorProps
           {investmentAmount && (
             <button
               onClick={clearAmount}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-neutral-400 hover:text-neutral-600 transition-colors"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-neutral-400 hover:text-neutral-600 dark:hover:text-neutral-300 transition-colors"
             >
               Clear
             </button>
@@ -211,7 +211,7 @@ export const BondCalculator = ({ defaultBondType = 'WEDB' }: BondCalculatorProps
 
       {/* Quick Amount Buttons */}
       <div className="mb-8">
-        <label className="block text-sm font-medium text-neutral-700 mb-3">
+        <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-3">
           Quick Add Denomination
         </label>
         <div className="flex flex-wrap gap-2">
@@ -221,8 +221,8 @@ export const BondCalculator = ({ defaultBondType = 'WEDB' }: BondCalculatorProps
               onClick={() => handleDenominationClick(amount)}
               className={`px-4 py-2 text-sm font-medium rounded-lg border transition-all duration-200 ${
                 selectedDenomination === amount
-                  ? 'border-brand-500 bg-brand-50 text-brand-700'
-                  : 'border-neutral-200 bg-white text-neutral-700 hover:border-neutral-300 hover:bg-neutral-50'
+                  ? 'border-brand-500 bg-brand-50 dark:bg-brand-950/50 text-brand-700 dark:text-brand-300'
+                  : 'border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:border-neutral-300 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-700'
               }`}
             >
               {bondInfo.currency === 'USD' ? '$' : '৳'}
@@ -234,8 +234,8 @@ export const BondCalculator = ({ defaultBondType = 'WEDB' }: BondCalculatorProps
 
       {/* Results */}
       {calculateResults && (
-        <div className="pt-6 border-t border-neutral-200 animate-fade-in">
-          <h3 className="font-display font-semibold text-neutral-900 mb-4">
+        <div className="pt-6 border-t border-neutral-200 dark:border-neutral-700 animate-fade-in">
+          <h3 className="font-display font-semibold text-neutral-900 dark:text-white mb-4">
             Investment Returns
           </h3>
           
@@ -248,7 +248,7 @@ export const BondCalculator = ({ defaultBondType = 'WEDB' }: BondCalculatorProps
             </div>
             <div className="stat-card">
               <div className="stat-label">Interest Rate</div>
-              <div className="stat-value text-xl md:text-2xl text-brand-600">
+              <div className="stat-value text-xl md:text-2xl text-brand-600 dark:text-brand-400">
                 {calculateResults.interestRate}%
               </div>
             </div>
@@ -258,30 +258,30 @@ export const BondCalculator = ({ defaultBondType = 'WEDB' }: BondCalculatorProps
                 {formatNumber(calculateResults.totalInterest, bondInfo.currency)}
               </div>
             </div>
-            <div className="stat-card bg-brand-50 border-brand-200">
-              <div className="stat-label text-brand-600">Maturity Value</div>
-              <div className="stat-value text-xl md:text-2xl text-brand-700">
+            <div className="stat-card bg-brand-50 dark:bg-brand-950/50 border-brand-200 dark:border-brand-800">
+              <div className="stat-label text-brand-600 dark:text-brand-400">Maturity Value</div>
+              <div className="stat-value text-xl md:text-2xl text-brand-700 dark:text-brand-300">
                 {formatNumber(calculateResults.maturityValue, bondInfo.currency)}
               </div>
             </div>
           </div>
 
           {/* Additional Info */}
-          <div className="bg-neutral-50 rounded-xl p-4">
+          <div className="bg-neutral-50 dark:bg-neutral-800/50 rounded-xl p-4">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm">
               <div className="flex justify-between sm:flex-col sm:gap-1">
-                <span className="text-neutral-500">Tenure</span>
-                <span className="font-medium text-neutral-900">{calculateResults.tenure}</span>
+                <span className="text-neutral-500 dark:text-neutral-400">Tenure</span>
+                <span className="font-medium text-neutral-900 dark:text-white">{calculateResults.tenure}</span>
               </div>
               <div className="flex justify-between sm:flex-col sm:gap-1">
-                <span className="text-neutral-500">Monthly Equivalent</span>
-                <span className="font-medium text-neutral-900">
+                <span className="text-neutral-500 dark:text-neutral-400">Monthly Equivalent</span>
+                <span className="font-medium text-neutral-900 dark:text-white">
                   ~{formatNumber(calculateResults.monthlyEquivalent, bondInfo.currency)}/mo
                 </span>
               </div>
               <div className="flex justify-between sm:flex-col sm:gap-1">
-                <span className="text-neutral-500">Tax Status</span>
-                <span className="font-medium text-brand-600">Tax Exempt</span>
+                <span className="text-neutral-500 dark:text-neutral-400">Tax Status</span>
+                <span className="font-medium text-brand-600 dark:text-brand-400">Tax Exempt</span>
               </div>
             </div>
           </div>
@@ -289,12 +289,12 @@ export const BondCalculator = ({ defaultBondType = 'WEDB' }: BondCalculatorProps
       )}
 
       {/* Bond Features */}
-      <div className="mt-8 pt-6 border-t border-neutral-200">
-        <h4 className="font-medium text-neutral-900 mb-3">Key Features</h4>
+      <div className="mt-8 pt-6 border-t border-neutral-200 dark:border-neutral-700">
+        <h4 className="font-medium text-neutral-900 dark:text-white mb-3">Key Features</h4>
         <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {bondInfo.features.slice(0, 4).map((feature, index) => (
-            <li key={index} className="flex items-start gap-2 text-sm text-neutral-600">
-              <svg className="w-5 h-5 text-brand-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <li key={index} className="flex items-start gap-2 text-sm text-neutral-600 dark:text-neutral-400">
+              <svg className="w-5 h-5 text-brand-500 dark:text-brand-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
               </svg>
               {feature}

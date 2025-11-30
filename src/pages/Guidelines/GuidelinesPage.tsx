@@ -97,18 +97,18 @@ export const GuidelinesPage = () => {
               <div key={step.number} className="relative">
                 {/* Connector Line (hidden on mobile, last item) */}
                 {index < steps.length - 1 && (
-                  <div className="hidden md:block absolute top-8 left-1/2 w-full h-0.5 bg-neutral-200" />
+                  <div className="hidden md:block absolute top-8 left-1/2 w-full h-0.5 bg-neutral-200 dark:bg-neutral-700" />
                 )}
                 
                 <div className="relative z-10 flex flex-col items-center text-center">
-                  <div className="w-16 h-16 rounded-2xl bg-brand-100 flex items-center justify-center text-brand-600 mb-4">
+                  <div className="w-16 h-16 rounded-2xl bg-brand-100 dark:bg-brand-900/50 flex items-center justify-center text-brand-600 dark:text-brand-400 mb-4">
                     {step.icon}
                   </div>
-                  <span className="text-xs font-bold text-brand-600 mb-2">STEP {step.number}</span>
-                  <h3 className="font-display font-semibold text-neutral-900 mb-2">
+                  <span className="text-xs font-bold text-brand-600 dark:text-brand-400 mb-2">STEP {step.number}</span>
+                  <h3 className="font-display font-semibold text-neutral-900 dark:text-white mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-sm text-neutral-600">
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400">
                     {step.description}
                   </p>
                 </div>
@@ -119,7 +119,7 @@ export const GuidelinesPage = () => {
       </section>
 
       {/* Required Documents */}
-      <section className="section bg-neutral-50">
+      <section className="section bg-neutral-50 dark:bg-neutral-900">
         <div className="container-wide">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
@@ -131,11 +131,11 @@ export const GuidelinesPage = () => {
               
               <div className="space-y-3">
                 {REQUIRED_DOCUMENTS.map((doc, index) => (
-                  <div key={index} className="flex items-start gap-3 p-4 bg-white rounded-xl border border-neutral-200">
-                    <div className="w-8 h-8 rounded-lg bg-brand-100 flex items-center justify-center flex-shrink-0">
-                      <span className="text-sm font-bold text-brand-600">{index + 1}</span>
+                  <div key={index} className="flex items-start gap-3 p-4 bg-white dark:bg-neutral-800 rounded-xl border border-neutral-200 dark:border-neutral-700">
+                    <div className="w-8 h-8 rounded-lg bg-brand-100 dark:bg-brand-900/50 flex items-center justify-center flex-shrink-0">
+                      <span className="text-sm font-bold text-brand-600 dark:text-brand-400">{index + 1}</span>
                     </div>
-                    <span className="text-sm text-neutral-700 pt-1.5">{doc}</span>
+                    <span className="text-sm text-neutral-700 dark:text-neutral-300 pt-1.5">{doc}</span>
                   </div>
                 ))}
               </div>
@@ -146,13 +146,13 @@ export const GuidelinesPage = () => {
               
               {/* Eligibility Note */}
               <div className="card p-6 mb-6">
-                <h4 className="font-display font-semibold text-neutral-900 mb-4 flex items-center gap-2">
-                  <svg className="w-5 h-5 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <h4 className="font-display font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2">
+                  <svg className="w-5 h-5 text-brand-600 dark:text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   Eligible Remittances
                 </h4>
-                <ul className="space-y-2 text-sm text-neutral-600">
+                <ul className="space-y-2 text-sm text-neutral-600 dark:text-neutral-300">
                   <li className="flex items-start gap-2">
                     <span className="w-1.5 h-1.5 rounded-full bg-brand-500 mt-2 flex-shrink-0" />
                     Salary/wages from employment abroad
@@ -173,16 +173,16 @@ export const GuidelinesPage = () => {
               </div>
 
               {/* Not Eligible */}
-              <div className="bg-red-50 border border-red-200 rounded-2xl p-6">
-                <h4 className="font-display font-semibold text-red-900 mb-4 flex items-center gap-2">
-                  <svg className="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-2xl p-6">
+                <h4 className="font-display font-semibold text-red-900 dark:text-red-300 mb-4 flex items-center gap-2">
+                  <svg className="w-5 h-5 text-red-600 dark:text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
                   </svg>
                   Not Eligible for Investment
                 </h4>
                 <ul className="space-y-2">
                   {notEligible.map((item, index) => (
-                    <li key={index} className="flex items-start gap-2 text-sm text-red-700">
+                    <li key={index} className="flex items-start gap-2 text-sm text-red-700 dark:text-red-300">
                       <svg className="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                       </svg>
@@ -209,33 +209,33 @@ export const GuidelinesPage = () => {
           <div className="max-w-3xl mx-auto">
             <div className="card p-8">
               <div className="text-center mb-8">
-                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-brand-100 mb-4">
-                  <span className="text-3xl font-display font-bold text-brand-600">১</span>
+                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-brand-100 dark:bg-brand-900/50 mb-4">
+                  <span className="text-3xl font-display font-bold text-brand-600 dark:text-brand-400">১</span>
                 </div>
-                <h3 className="text-2xl font-display font-bold text-neutral-900 mb-2">
+                <h3 className="text-2xl font-display font-bold text-neutral-900 dark:text-white mb-2">
                   BDT 1 Crore
                 </h3>
-                <p className="text-neutral-600">
+                <p className="text-neutral-600 dark:text-neutral-400">
                   Maximum combined investment limit across all three bond types
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="p-4 bg-brand-50 rounded-xl text-center">
-                  <span className="text-sm font-medium text-brand-700">WEDB</span>
-                  <p className="text-xs text-brand-600 mt-1">Up to ৳1 Crore</p>
+                <div className="p-4 bg-brand-50 dark:bg-brand-900/30 rounded-xl text-center">
+                  <span className="text-sm font-medium text-brand-700 dark:text-brand-300">WEDB</span>
+                  <p className="text-xs text-brand-600 dark:text-brand-400 mt-1">Up to ৳1 Crore</p>
                 </div>
-                <div className="p-4 bg-blue-50 rounded-xl text-center">
-                  <span className="text-sm font-medium text-blue-700">USDIB</span>
-                  <p className="text-xs text-blue-600 mt-1">USD equivalent to ৳1 Crore</p>
+                <div className="p-4 bg-blue-50 dark:bg-blue-900/30 rounded-xl text-center">
+                  <span className="text-sm font-medium text-blue-700 dark:text-blue-300">USDIB</span>
+                  <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">USD equivalent to ৳1 Crore</p>
                 </div>
-                <div className="p-4 bg-purple-50 rounded-xl text-center">
-                  <span className="text-sm font-medium text-purple-700">USDPB</span>
-                  <p className="text-xs text-purple-600 mt-1">USD equivalent to ৳1 Crore</p>
+                <div className="p-4 bg-purple-50 dark:bg-purple-900/30 rounded-xl text-center">
+                  <span className="text-sm font-medium text-purple-700 dark:text-purple-300">USDPB</span>
+                  <p className="text-xs text-purple-600 dark:text-purple-400 mt-1">USD equivalent to ৳1 Crore</p>
                 </div>
               </div>
 
-              <p className="text-center text-sm text-neutral-500 mt-6">
+              <p className="text-center text-sm text-neutral-500 dark:text-neutral-400 mt-6">
                 Note: The limit is combined across all bond types, not per bond type.
               </p>
             </div>
@@ -244,7 +244,7 @@ export const GuidelinesPage = () => {
       </section>
 
       {/* Authorized Banks */}
-      <section className="section bg-neutral-50">
+      <section className="section bg-neutral-50 dark:bg-neutral-900">
         <div className="container-wide">
           <div className="text-center mb-12">
             <h2 className="heading-3 mb-4">Authorized Issuing Banks</h2>
@@ -256,10 +256,10 @@ export const GuidelinesPage = () => {
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {ISSUING_BANKS.map((bank, index) => (
               <div key={index} className="card p-4 text-center">
-                <span className="text-sm font-medium text-neutral-900">{bank.name}</span>
+                <span className="text-sm font-medium text-neutral-900 dark:text-white">{bank.name}</span>
                 <span className={`block text-xs mt-1 ${
-                  bank.type === 'State-owned' ? 'text-brand-600' : 
-                  bank.type === 'Specialized' ? 'text-amber-600' : 'text-blue-600'
+                  bank.type === 'State-owned' ? 'text-brand-600 dark:text-brand-400' : 
+                  bank.type === 'Specialized' ? 'text-amber-600 dark:text-amber-400' : 'text-blue-600 dark:text-blue-400'
                 }`}>
                   {bank.type}
                 </span>
@@ -267,7 +267,7 @@ export const GuidelinesPage = () => {
             ))}
           </div>
 
-          <p className="text-center text-sm text-neutral-500 mt-8">
+          <p className="text-center text-sm text-neutral-500 dark:text-neutral-400 mt-8">
             Contact your preferred bank for specific procedures and remote purchase options.
           </p>
         </div>
@@ -281,45 +281,45 @@ export const GuidelinesPage = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="card p-6">
-                <h4 className="font-display font-semibold text-neutral-900 mb-4 flex items-center gap-2">
+                <h4 className="font-display font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2">
                   <svg className="w-5 h-5 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   Premature Encashment
                 </h4>
-                <ul className="space-y-3 text-sm text-neutral-600">
+                <ul className="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
                   <li className="flex items-start gap-2">
-                    <span className="font-medium text-neutral-900">WEDB:</span>
+                    <span className="font-medium text-neutral-900 dark:text-white">WEDB:</span>
                     After 6 months at reduced rates
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="font-medium text-neutral-900">USD Bonds:</span>
+                    <span className="font-medium text-neutral-900 dark:text-white">USD Bonds:</span>
                     After 1 year at 5% interest
                   </li>
-                  <li className="text-xs text-neutral-500 pt-2">
+                  <li className="text-xs text-neutral-500 dark:text-neutral-400 pt-2">
                     Physical presence at bank required with original bond certificate
                   </li>
                 </ul>
               </div>
 
               <div className="card p-6">
-                <h4 className="font-display font-semibold text-neutral-900 mb-4 flex items-center gap-2">
+                <h4 className="font-display font-semibold text-neutral-900 dark:text-white mb-4 flex items-center gap-2">
                   <svg className="w-5 h-5 text-brand-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   Maturity Encashment
                 </h4>
-                <ul className="space-y-3 text-sm text-neutral-600">
+                <ul className="space-y-3 text-sm text-neutral-600 dark:text-neutral-300">
                   <li className="flex items-start gap-2">
-                    <span className="font-medium text-neutral-900">WEDB:</span>
+                    <span className="font-medium text-neutral-900 dark:text-white">WEDB:</span>
                     Principal + Interest in BDT; Principal repatriable
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="font-medium text-neutral-900">USDIB:</span>
+                    <span className="font-medium text-neutral-900 dark:text-white">USDIB:</span>
                     Principal + Interest fully repatriable in USD
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="font-medium text-neutral-900">USDPB:</span>
+                    <span className="font-medium text-neutral-900 dark:text-white">USDPB:</span>
                     Principal in USD, Interest in BDT equivalent
                   </li>
                 </ul>

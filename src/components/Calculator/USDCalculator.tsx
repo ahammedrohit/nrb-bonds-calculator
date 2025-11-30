@@ -90,19 +90,19 @@ export const USDCalculator = ({ bondType }: USDCalculatorProps) => {
     <div className="card p-6 md:p-8">
       <div className="flex items-center gap-3 mb-6">
         <div className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-          isUSDIB ? 'bg-blue-100' : 'bg-purple-100'
+          isUSDIB ? 'bg-blue-100 dark:bg-blue-900/50' : 'bg-purple-100 dark:bg-purple-900/50'
         }`}>
           <span className={`font-display font-bold ${
-            isUSDIB ? 'text-blue-700' : 'text-purple-700'
+            isUSDIB ? 'text-blue-700 dark:text-blue-300' : 'text-purple-700 dark:text-purple-300'
           }`}>
             {isUSDIB ? 'DIB' : 'DPB'}
           </span>
         </div>
         <div>
-          <h2 className="font-display font-bold text-xl text-neutral-900">
+          <h2 className="font-display font-bold text-xl text-neutral-900 dark:text-white">
             {bondInfo.name}
           </h2>
-          <p className="text-sm text-neutral-500">
+          <p className="text-sm text-neutral-500 dark:text-neutral-400">
             3-Year Bond • {bondInfo.interestRate}% Interest • Tax Free
           </p>
         </div>
@@ -110,14 +110,14 @@ export const USDCalculator = ({ bondType }: USDCalculatorProps) => {
 
       {/* Key Differentiator */}
       <div className={`mb-6 p-4 rounded-xl border ${
-        isUSDIB ? 'bg-blue-50 border-blue-200' : 'bg-purple-50 border-purple-200'
+        isUSDIB ? 'bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800' : 'bg-purple-50 dark:bg-purple-950/30 border-purple-200 dark:border-purple-800'
       }`}>
         <h4 className={`font-medium mb-2 ${
-          isUSDIB ? 'text-blue-800' : 'text-purple-800'
+          isUSDIB ? 'text-blue-800 dark:text-blue-300' : 'text-purple-800 dark:text-purple-300'
         }`}>
           {isUSDIB ? '💵 Full USD Repatriation' : '💹 Higher Interest Rate'}
         </h4>
-        <p className={`text-sm ${isUSDIB ? 'text-blue-700' : 'text-purple-700'}`}>
+        <p className={`text-sm ${isUSDIB ? 'text-blue-700 dark:text-blue-400' : 'text-purple-700 dark:text-purple-400'}`}>
           {isUSDIB 
             ? 'Both principal and interest can be repatriated in USD. Best for maintaining USD savings.'
             : 'Higher interest rate (7.5% vs 6.5%) but interest paid in BDT equivalent. Principal repatriable in USD.'
@@ -128,11 +128,11 @@ export const USDCalculator = ({ bondType }: USDCalculatorProps) => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         {/* Amount Input */}
         <div>
-          <label className="block text-sm font-medium text-neutral-700 mb-2">
+          <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
             Investment Amount (USD)
           </label>
           <div className="relative">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 font-medium">
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-neutral-500 font-medium">
               $
             </span>
             <input
@@ -147,11 +147,11 @@ export const USDCalculator = ({ bondType }: USDCalculatorProps) => {
 
         {/* Exchange Rate Input */}
         <div>
-          <label className="block text-sm font-medium text-neutral-700 mb-2">
+          <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
             Exchange Rate (BDT per USD)
           </label>
           <div className="relative">
-            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 font-medium">
+            <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-neutral-500 font-medium">
               ৳
             </span>
             <input
@@ -172,7 +172,7 @@ export const USDCalculator = ({ bondType }: USDCalculatorProps) => {
             <button
               key={denom}
               onClick={() => setAmount(denom.toLocaleString())}
-              className="px-3 py-1.5 text-sm font-medium rounded-lg border border-neutral-200 bg-white text-neutral-700 hover:border-neutral-300 hover:bg-neutral-50 transition-all"
+              className="px-3 py-1.5 text-sm font-medium rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:border-neutral-300 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-all"
             >
               ${denom.toLocaleString()}
             </button>
@@ -183,7 +183,7 @@ export const USDCalculator = ({ bondType }: USDCalculatorProps) => {
       {/* Results */}
       {calculations && (
         <div className="animate-fade-in">
-          <h3 className="font-display font-semibold text-neutral-900 mb-4">
+          <h3 className="font-display font-semibold text-neutral-900 dark:text-white mb-4">
             Investment Returns
           </h3>
 
@@ -201,7 +201,7 @@ export const USDCalculator = ({ bondType }: USDCalculatorProps) => {
               <tbody>
                 <tr>
                   <td className="font-medium">Premature (After 1 Year)</td>
-                  <td className="text-right font-mono text-amber-600 font-semibold">
+                  <td className="text-right font-mono text-amber-600 dark:text-amber-400 font-semibold">
                     {calculations.premature.rate}%
                   </td>
                   <td className="text-right font-mono">
@@ -211,17 +211,17 @@ export const USDCalculator = ({ bondType }: USDCalculatorProps) => {
                     {formatUSD(calculations.premature.totalUSD)}
                   </td>
                 </tr>
-                <tr className={isUSDIB ? 'bg-blue-50' : 'bg-purple-50'}>
+                <tr className={isUSDIB ? 'bg-blue-50 dark:bg-blue-950/30' : 'bg-purple-50 dark:bg-purple-950/30'}>
                   <td className="font-medium">
                     At Maturity (3 Years)
                     <span className={`ml-2 badge text-xs ${
-                      isUSDIB ? 'badge-info' : 'bg-purple-100 text-purple-700 border-purple-200'
+                      isUSDIB ? 'badge-info' : 'bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-800'
                     }`}>
                       Best
                     </span>
                   </td>
                   <td className={`text-right font-mono font-semibold ${
-                    isUSDIB ? 'text-blue-600' : 'text-purple-600'
+                    isUSDIB ? 'text-blue-600 dark:text-blue-400' : 'text-purple-600 dark:text-purple-400'
                   }`}>
                     {calculations.maturity.rate}%
                   </td>
@@ -238,53 +238,53 @@ export const USDCalculator = ({ bondType }: USDCalculatorProps) => {
 
           {/* Summary Cards */}
           <div className={`p-6 rounded-xl border ${
-            isUSDIB ? 'bg-blue-50 border-blue-200' : 'bg-purple-50 border-purple-200'
+            isUSDIB ? 'bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800' : 'bg-purple-50 dark:bg-purple-950/30 border-purple-200 dark:border-purple-800'
           }`}>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <div>
                 <div className={`text-sm font-medium ${
-                  isUSDIB ? 'text-blue-600' : 'text-purple-600'
+                  isUSDIB ? 'text-blue-600 dark:text-blue-400' : 'text-purple-600 dark:text-purple-400'
                 }`}>Principal</div>
                 <div className={`text-xl font-display font-bold ${
-                  isUSDIB ? 'text-blue-900' : 'text-purple-900'
+                  isUSDIB ? 'text-blue-900 dark:text-blue-200' : 'text-purple-900 dark:text-purple-200'
                 }`}>
                   {formatUSD(calculations.principal.usd)}
                 </div>
-                <div className="text-xs text-neutral-500">
+                <div className="text-xs text-neutral-500 dark:text-neutral-400">
                   ≈ {formatBDT(calculations.principal.bdt)}
                 </div>
               </div>
               <div>
                 <div className={`text-sm font-medium ${
-                  isUSDIB ? 'text-blue-600' : 'text-purple-600'
+                  isUSDIB ? 'text-blue-600 dark:text-blue-400' : 'text-purple-600 dark:text-purple-400'
                 }`}>Interest at Maturity</div>
                 <div className={`text-xl font-display font-bold ${
-                  isUSDIB ? 'text-blue-900' : 'text-purple-900'
+                  isUSDIB ? 'text-blue-900 dark:text-blue-200' : 'text-purple-900 dark:text-purple-200'
                 }`}>
                   {formatUSD(calculations.maturity.interestUSD)}
                 </div>
                 {!isUSDIB && (
-                  <div className="text-xs text-neutral-500">
+                  <div className="text-xs text-neutral-500 dark:text-neutral-400">
                     Paid in BDT: ≈ {formatBDT(calculations.maturity.interestBDT)}
                   </div>
                 )}
               </div>
               <div>
                 <div className={`text-sm font-medium ${
-                  isUSDIB ? 'text-blue-600' : 'text-purple-600'
+                  isUSDIB ? 'text-blue-600 dark:text-blue-400' : 'text-purple-600 dark:text-purple-400'
                 }`}>Total at Maturity</div>
                 <div className={`text-xl font-display font-bold ${
-                  isUSDIB ? 'text-blue-900' : 'text-purple-900'
+                  isUSDIB ? 'text-blue-900 dark:text-blue-200' : 'text-purple-900 dark:text-purple-200'
                 }`}>
                   {formatUSD(calculations.maturity.totalUSD)}
                 </div>
               </div>
               <div>
                 <div className={`text-sm font-medium ${
-                  isUSDIB ? 'text-blue-600' : 'text-purple-600'
+                  isUSDIB ? 'text-blue-600 dark:text-blue-400' : 'text-purple-600 dark:text-purple-400'
                 }`}>Repatriation</div>
                 <div className={`text-sm font-medium ${
-                  isUSDIB ? 'text-blue-900' : 'text-purple-900'
+                  isUSDIB ? 'text-blue-900 dark:text-blue-200' : 'text-purple-900 dark:text-purple-200'
                 }`}>
                   {isUSDIB ? 'Principal + Interest in USD' : 'Principal in USD only'}
                 </div>

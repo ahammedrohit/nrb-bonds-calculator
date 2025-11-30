@@ -15,11 +15,11 @@ export const FAQPage = () => {
       description="Common questions about Bangladesh NRB Bonds including eligibility, investment process, repatriation, and more."
     >
       {/* Hero */}
-      <section className="bg-neutral-50 py-16 md:py-24">
+      <section className="bg-neutral-50 dark:bg-neutral-900 py-16 md:py-24">
         <div className="container-wide">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="heading-1 mb-4">
-              Frequently Asked <span className="text-brand-600">Questions</span>
+              Frequently Asked <span className="text-brand-600 dark:text-brand-400">Questions</span>
             </h1>
             <p className="subheading">
               Find answers to common questions about NRB Bonds, investment process, 
@@ -44,13 +44,13 @@ export const FAQPage = () => {
                   onClick={() => toggleFAQ(index)}
                   className="w-full px-6 py-5 flex items-start justify-between text-left"
                 >
-                  <span className="font-display font-semibold text-neutral-900 pr-8">
+                  <span className="font-display font-semibold text-neutral-900 dark:text-white pr-8">
                     {faq.question}
                   </span>
                   <span className={`flex-shrink-0 w-8 h-8 rounded-lg flex items-center justify-center transition-all duration-300 ${
                     openIndex === index 
-                      ? 'bg-brand-100 text-brand-600 rotate-180' 
-                      : 'bg-neutral-100 text-neutral-500'
+                      ? 'bg-brand-100 dark:bg-brand-900/50 text-brand-600 dark:text-brand-400 rotate-180' 
+                      : 'bg-neutral-100 dark:bg-neutral-700 text-neutral-500 dark:text-neutral-400'
                   }`}>
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -62,8 +62,8 @@ export const FAQPage = () => {
                   openIndex === index ? 'max-h-96' : 'max-h-0'
                 }`}>
                   <div className="px-6 pb-5">
-                    <div className="pt-2 border-t border-neutral-100">
-                      <p className="text-neutral-600 pt-4 leading-relaxed">
+                    <div className="pt-2 border-t border-neutral-100 dark:border-neutral-700">
+                      <p className="text-neutral-600 dark:text-neutral-300 pt-4 leading-relaxed">
                         {faq.answer}
                       </p>
                     </div>
@@ -76,7 +76,7 @@ export const FAQPage = () => {
       </section>
 
       {/* Additional Resources */}
-      <section className="section bg-neutral-50">
+      <section className="section bg-neutral-50 dark:bg-neutral-900">
         <div className="container-wide">
           <div className="text-center mb-12">
             <h2 className="heading-3 mb-4">Still Have Questions?</h2>
@@ -92,15 +92,15 @@ export const FAQPage = () => {
               rel="noopener noreferrer"
               className="card-interactive p-6 text-center group"
             >
-              <div className="w-14 h-14 rounded-2xl bg-brand-100 flex items-center justify-center mx-auto mb-4 group-hover:bg-brand-200 transition-colors">
-                <svg className="w-7 h-7 text-brand-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="w-14 h-14 rounded-2xl bg-brand-100 dark:bg-brand-900/50 flex items-center justify-center mx-auto mb-4 group-hover:bg-brand-200 dark:group-hover:bg-brand-900/70 transition-colors">
+                <svg className="w-7 h-7 text-brand-600 dark:text-brand-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                 </svg>
               </div>
-              <h3 className="font-display font-semibold text-neutral-900 mb-2">
+              <h3 className="font-display font-semibold text-neutral-900 dark:text-white mb-2">
                 Bangladesh Bank
               </h3>
-              <p className="text-sm text-neutral-600">
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">
                 Official NRB Bond information and guidelines
               </p>
             </a>
@@ -111,15 +111,15 @@ export const FAQPage = () => {
               rel="noopener noreferrer"
               className="card-interactive p-6 text-center group"
             >
-              <div className="w-14 h-14 rounded-2xl bg-blue-100 flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-200 transition-colors">
-                <svg className="w-7 h-7 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="w-14 h-14 rounded-2xl bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-200 dark:group-hover:bg-blue-900/70 transition-colors">
+                <svg className="w-7 h-7 text-blue-600 dark:text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                 </svg>
               </div>
-              <h3 className="font-display font-semibold text-neutral-900 mb-2">
+              <h3 className="font-display font-semibold text-neutral-900 dark:text-white mb-2">
                 Bond Features PDF
               </h3>
-              <p className="text-sm text-neutral-600">
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">
                 Download official bond feature documents
               </p>
             </a>
@@ -128,15 +128,15 @@ export const FAQPage = () => {
               href="/guidelines"
               className="card-interactive p-6 text-center group"
             >
-              <div className="w-14 h-14 rounded-2xl bg-purple-100 flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-200 transition-colors">
-                <svg className="w-7 h-7 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <div className="w-14 h-14 rounded-2xl bg-purple-100 dark:bg-purple-900/50 flex items-center justify-center mx-auto mb-4 group-hover:bg-purple-200 dark:group-hover:bg-purple-900/70 transition-colors">
+                <svg className="w-7 h-7 text-purple-600 dark:text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
               </div>
-              <h3 className="font-display font-semibold text-neutral-900 mb-2">
+              <h3 className="font-display font-semibold text-neutral-900 dark:text-white mb-2">
                 Investment Guide
               </h3>
-              <p className="text-sm text-neutral-600">
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">
                 Step-by-step investment process guide
               </p>
             </a>
@@ -151,49 +151,49 @@ export const FAQPage = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="card p-6">
-              <h4 className="font-display font-semibold text-neutral-900 mb-3">
+              <h4 className="font-display font-semibold text-neutral-900 dark:text-white mb-3">
                 Investment Limit
               </h4>
-              <p className="text-3xl font-display font-bold text-brand-600 mb-2">
+              <p className="text-3xl font-display font-bold text-brand-600 dark:text-brand-400 mb-2">
                 ৳1 Crore
               </p>
-              <p className="text-sm text-neutral-500">
+              <p className="text-sm text-neutral-500 dark:text-neutral-400">
                 Combined maximum across all bonds
               </p>
             </div>
 
             <div className="card p-6">
-              <h4 className="font-display font-semibold text-neutral-900 mb-3">
+              <h4 className="font-display font-semibold text-neutral-900 dark:text-white mb-3">
                 Highest Rate
               </h4>
-              <p className="text-3xl font-display font-bold text-brand-600 mb-2">
+              <p className="text-3xl font-display font-bold text-brand-600 dark:text-brand-400 mb-2">
                 12%
               </p>
-              <p className="text-sm text-neutral-500">
+              <p className="text-sm text-neutral-500 dark:text-neutral-400">
                 WEDB for amounts ≤15 Lacs
               </p>
             </div>
 
             <div className="card p-6">
-              <h4 className="font-display font-semibold text-neutral-900 mb-3">
+              <h4 className="font-display font-semibold text-neutral-900 dark:text-white mb-3">
                 WEDB Tenure
               </h4>
-              <p className="text-3xl font-display font-bold text-brand-600 mb-2">
+              <p className="text-3xl font-display font-bold text-brand-600 dark:text-brand-400 mb-2">
                 5 Years
               </p>
-              <p className="text-sm text-neutral-500">
+              <p className="text-sm text-neutral-500 dark:text-neutral-400">
                 Early encashment after 6 months
               </p>
             </div>
 
             <div className="card p-6">
-              <h4 className="font-display font-semibold text-neutral-900 mb-3">
+              <h4 className="font-display font-semibold text-neutral-900 dark:text-white mb-3">
                 USD Bond Tenure
               </h4>
-              <p className="text-3xl font-display font-bold text-blue-600 mb-2">
+              <p className="text-3xl font-display font-bold text-blue-600 dark:text-blue-400 mb-2">
                 3 Years
               </p>
-              <p className="text-sm text-neutral-500">
+              <p className="text-sm text-neutral-500 dark:text-neutral-400">
                 Early encashment after 1 year
               </p>
             </div>

@@ -75,14 +75,14 @@ export const WEDBCalculator = () => {
   return (
     <div className="card p-6 md:p-8">
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-12 h-12 rounded-xl bg-brand-100 flex items-center justify-center">
-          <span className="text-brand-700 font-display font-bold">WE</span>
+        <div className="w-12 h-12 rounded-xl bg-brand-100 dark:bg-brand-900/50 flex items-center justify-center">
+          <span className="text-brand-700 dark:text-brand-300 font-display font-bold">WE</span>
         </div>
         <div>
-          <h2 className="font-display font-bold text-xl text-neutral-900">
+          <h2 className="font-display font-bold text-xl text-neutral-900 dark:text-white">
             Wage Earner Development Bond
           </h2>
-          <p className="text-sm text-neutral-500">
+          <p className="text-sm text-neutral-500 dark:text-neutral-400">
             5-Year Bond • Up to 12% Interest • Tax Free
           </p>
         </div>
@@ -90,11 +90,11 @@ export const WEDBCalculator = () => {
 
       {/* Amount Input */}
       <div className="mb-6">
-        <label className="block text-sm font-medium text-neutral-700 mb-2">
+        <label className="block text-sm font-medium text-neutral-700 dark:text-neutral-300 mb-2">
           Investment Amount (BDT)
         </label>
         <div className="relative">
-          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 font-medium">
+          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-neutral-400 dark:text-neutral-500 font-medium">
             ৳
           </span>
           <input
@@ -114,7 +114,7 @@ export const WEDBCalculator = () => {
             <button
               key={denom}
               onClick={() => setAmount(denom.toLocaleString())}
-              className="px-3 py-1.5 text-sm font-medium rounded-lg border border-neutral-200 bg-white text-neutral-700 hover:border-neutral-300 hover:bg-neutral-50 transition-all"
+              className="px-3 py-1.5 text-sm font-medium rounded-lg border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300 hover:border-neutral-300 dark:hover:border-neutral-600 hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-all"
             >
               ৳{denom.toLocaleString()}
             </button>
@@ -123,32 +123,32 @@ export const WEDBCalculator = () => {
       </div>
 
       {/* Interest Rate Tiers */}
-      <div className="mb-8 p-4 bg-amber-50 rounded-xl border border-amber-200">
-        <h4 className="font-medium text-amber-800 mb-2 flex items-center gap-2">
+      <div className="mb-8 p-4 bg-amber-50 dark:bg-amber-950/30 rounded-xl border border-amber-200 dark:border-amber-800">
+        <h4 className="font-medium text-amber-800 dark:text-amber-300 mb-2 flex items-center gap-2">
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
           Interest Rate Tiers
         </h4>
-        <p className="text-sm text-amber-700 mb-3">
+        <p className="text-sm text-amber-700 dark:text-amber-400 mb-3">
           WEDB interest rates vary based on investment amount:
         </p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
-          <div className="bg-white rounded-lg p-3 border border-amber-200">
-            <div className="font-bold text-amber-900">≤15 Lacs</div>
-            <div className="text-amber-700">12%</div>
+          <div className="bg-white dark:bg-neutral-900 rounded-lg p-3 border border-amber-200 dark:border-amber-800">
+            <div className="font-bold text-amber-900 dark:text-amber-200">≤15 Lacs</div>
+            <div className="text-amber-700 dark:text-amber-400">12%</div>
           </div>
-          <div className="bg-white rounded-lg p-3 border border-amber-200">
-            <div className="font-bold text-amber-900">15-30 Lacs</div>
-            <div className="text-amber-700">11%</div>
+          <div className="bg-white dark:bg-neutral-900 rounded-lg p-3 border border-amber-200 dark:border-amber-800">
+            <div className="font-bold text-amber-900 dark:text-amber-200">15-30 Lacs</div>
+            <div className="text-amber-700 dark:text-amber-400">11%</div>
           </div>
-          <div className="bg-white rounded-lg p-3 border border-amber-200">
-            <div className="font-bold text-amber-900">30-50 Lacs</div>
-            <div className="text-amber-700">10%</div>
+          <div className="bg-white dark:bg-neutral-900 rounded-lg p-3 border border-amber-200 dark:border-amber-800">
+            <div className="font-bold text-amber-900 dark:text-amber-200">30-50 Lacs</div>
+            <div className="text-amber-700 dark:text-amber-400">10%</div>
           </div>
-          <div className="bg-white rounded-lg p-3 border border-amber-200">
-            <div className="font-bold text-amber-900">&gt;50 Lacs</div>
-            <div className="text-amber-700">9%</div>
+          <div className="bg-white dark:bg-neutral-900 rounded-lg p-3 border border-amber-200 dark:border-amber-800">
+            <div className="font-bold text-amber-900 dark:text-amber-200">&gt;50 Lacs</div>
+            <div className="text-amber-700 dark:text-amber-400">9%</div>
           </div>
         </div>
       </div>
@@ -156,7 +156,7 @@ export const WEDBCalculator = () => {
       {/* Results Table */}
       {calculations && (
         <div className="animate-fade-in">
-          <h3 className="font-display font-semibold text-neutral-900 mb-4">
+          <h3 className="font-display font-semibold text-neutral-900 dark:text-white mb-4">
             Returns at Different Encashment Periods
           </h3>
           
@@ -174,7 +174,7 @@ export const WEDBCalculator = () => {
                 {calculations.map((calc, index) => (
                   <tr 
                     key={index}
-                    className={index === calculations.length - 1 ? 'bg-brand-50' : ''}
+                    className={index === calculations.length - 1 ? 'bg-brand-50 dark:bg-brand-950/50' : ''}
                   >
                     <td className="font-medium">
                       {calc.period}
@@ -182,7 +182,7 @@ export const WEDBCalculator = () => {
                         <span className="ml-2 badge badge-success text-xs">Best</span>
                       )}
                     </td>
-                    <td className="text-right font-mono text-brand-600 font-semibold">
+                    <td className="text-right font-mono text-brand-600 dark:text-brand-400 font-semibold">
                       {calc.rate}%
                     </td>
                     <td className="text-right font-mono">
@@ -198,23 +198,23 @@ export const WEDBCalculator = () => {
           </div>
 
           {/* Summary Card */}
-          <div className="mt-6 p-6 bg-brand-50 rounded-xl border border-brand-200">
+          <div className="mt-6 p-6 bg-brand-50 dark:bg-brand-950/50 rounded-xl border border-brand-200 dark:border-brand-800">
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               <div>
-                <div className="text-sm text-brand-600 font-medium">Principal</div>
-                <div className="text-2xl font-display font-bold text-brand-900">
+                <div className="text-sm text-brand-600 dark:text-brand-400 font-medium">Principal</div>
+                <div className="text-2xl font-display font-bold text-brand-900 dark:text-brand-200">
                   {formatBDT(parseFloat(amount.replace(/,/g, '')))}
                 </div>
               </div>
               <div>
-                <div className="text-sm text-brand-600 font-medium">Interest at Maturity</div>
-                <div className="text-2xl font-display font-bold text-brand-900">
+                <div className="text-sm text-brand-600 dark:text-brand-400 font-medium">Interest at Maturity</div>
+                <div className="text-2xl font-display font-bold text-brand-900 dark:text-brand-200">
                   {formatBDT(calculations[calculations.length - 1].interest)}
                 </div>
               </div>
               <div>
-                <div className="text-sm text-brand-600 font-medium">Total at Maturity</div>
-                <div className="text-2xl font-display font-bold text-brand-900">
+                <div className="text-sm text-brand-600 dark:text-brand-400 font-medium">Total at Maturity</div>
+                <div className="text-2xl font-display font-bold text-brand-900 dark:text-brand-200">
                   {formatBDT(calculations[calculations.length - 1].total)}
                 </div>
               </div>
