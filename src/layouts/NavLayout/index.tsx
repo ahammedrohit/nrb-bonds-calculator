@@ -1,3 +1,1 @@
-import { NavLayout } from "./NavLayout";
-
-export default NavLayout
+export { NavLayout, default } from './NavLayout';
