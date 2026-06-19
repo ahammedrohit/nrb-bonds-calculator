@@ -1,4 +1,6 @@
 import { FormEvent, useEffect, useRef, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { CHAT_API_URL } from '../../config'
 
 type Message = {
@@ -187,13 +189,21 @@ export default function Chatbot() {
                 className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'} animate-slide-up`}
               >
                 <div
-                  className={`max-w-[88%] rounded-3xl px-4 py-3 whitespace-pre-wrap leading-7 text-sm ${
+                  className={`max-w-[88%] rounded-3xl px-4 py-3 leading-7 text-sm ${
                     message.role === 'user'
-                      ? 'bg-brand-600 text-white rounded-br-md'
+                      ? 'bg-brand-600 text-white rounded-br-md whitespace-pre-wrap'
                       : 'bg-white dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200 rounded-bl-md border border-neutral-200 dark:border-neutral-700'
                   }`}
                 >
-                  {message.content}
+                  {message.role === 'user' ? (
+                    message.content
+                  ) : (
+                    <div className="chatbot-markdown">
+                      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                        {message.content}
+                      </ReactMarkdown>
+                    </div>
+                  )}
                 </div>
               </div>
             ))}

@@ -248,3 +248,130 @@
     transform: translateY(0);
   }
 }
+
+/* Chatbot Markdown Rendering */
+.chatbot-markdown {
+  font-size: 0.875rem;
+  line-height: 1.75;
+  word-break: break-word;
+}
+.chatbot-markdown > *:first-child {
+  margin-top: 0;
+}
+.chatbot-markdown > *:last-child {
+  margin-bottom: 0;
+}
+.chatbot-markdown p {
+  margin: 0 0 0.6em 0;
+}
+.chatbot-markdown h1,
+.chatbot-markdown h2,
+.chatbot-markdown h3,
+.chatbot-markdown h4 {
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0.9em 0 0.4em 0;
+}
+.chatbot-markdown h1 { font-size: 1.15em; }
+.chatbot-markdown h2 { font-size: 1.1em; }
+.chatbot-markdown h3 { font-size: 1em; }
+.chatbot-markdown h4 { font-size: 0.95em; }
+.chatbot-markdown ul,
+.chatbot-markdown ol {
+  margin: 0.3em 0 0.6em 0;
+  padding-left: 1.4em;
+}
+.chatbot-markdown ul { list-style: disc; }
+.chatbot-markdown ol { list-style: decimal; }
+.chatbot-markdown li {
+  margin: 0.2em 0;
+}
+.chatbot-markdown li > p {
+  margin: 0;
+}
+.chatbot-markdown strong {
+  font-weight: 700;
+  color: inherit;
+}
+.chatbot-markdown em {
+  font-style: italic;
+}
+.chatbot-markdown a {
+  color: #287a50;
+  text-decoration: underline;
+  word-break: break-all;
+}
+.chatbot-markdown a:hover {
+  color: #226242;
+}
+.dark .chatbot-markdown a {
+  color: #5ab381;
+}
+.chatbot-markdown hr {
+  border: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 0.8em 0;
+}
+.dark .chatbot-markdown hr {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+.chatbot-markdown blockquote {
+  border-left: 3px solid #5ab381;
+  padding-left: 0.8em;
+  margin: 0.5em 0;
+  color: inherit;
+  opacity: 0.85;
+  font-style: italic;
+}
+.chatbot-markdown code {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85em;
+}
+.dark .chatbot-markdown code {
+  background: rgba(255, 255, 255, 0.08);
+}
+.chatbot-markdown pre {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 0.7em 0.9em;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 0.5em 0;
+}
+.dark .chatbot-markdown pre {
+  background: rgba(255, 255, 255, 0.05);
+}
+.chatbot-markdown pre code {
+  background: transparent;
+  padding: 0;
+}
+.chatbot-markdown table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.6em 0;
+  font-size: 0.85em;
+  display: block;
+  overflow-x: auto;
+}
+.chatbot-markdown thead {
+  background: rgba(40, 122, 80, 0.08);
+}
+.dark .chatbot-markdown thead {
+  background: rgba(90, 179, 129, 0.1);
+}
+.chatbot-markdown th,
+.chatbot-markdown td {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0.4em 0.6em;
+  text-align: left;
+  vertical-align: top;
+}
+.dark .chatbot-markdown th,
+.dark .chatbot-markdown td {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+.chatbot-markdown th {
+  font-weight: 700;
+}
