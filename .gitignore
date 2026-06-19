@@ -22,3 +22,12 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Lambda zip artifact (regenerated in CI)
+lambda.zip
+
+# Local docs - not committed (used to regenerate bonds-context.md locally)
+docs
+
+# Local lambda context regeneration output (committed version lives in repo)
+# lambda/bonds-context.md IS committed
