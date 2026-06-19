@@ -2,9 +2,9 @@ const fs = require('fs')
 const path = require('path')
 
 const BONDS_CONTEXT = fs.readFileSync(path.join(__dirname, 'bonds-context.md'), 'utf8')
-const ZAI_MODEL = process.env.ZAI_MODEL || 'glm-5.2'
+const ZAI_MODEL = process.env.ZAI_MODEL || 'glm-4.5-flash'
 const ZAI_API_URL = `${process.env.ZAI_BASE_URL || 'https://api.z.ai/api/coding/paas/v4'}/chat/completions`
-const ZAI_THINKING_TYPE = process.env.ZAI_THINKING_TYPE || 'enabled'
+const ZAI_THINKING_TYPE = process.env.ZAI_THINKING_TYPE || 'disabled'
 const ZAI_MAX_TOKENS = Number(process.env.ZAI_MAX_TOKENS || 1500)
 const ZAI_RELEVANCE_MODEL = process.env.ZAI_RELEVANCE_MODEL || ZAI_MODEL
 const ZAI_RELEVANCE_THINKING_TYPE = process.env.ZAI_RELEVANCE_THINKING_TYPE || 'disabled'
@@ -199,7 +199,8 @@ async function requestZaiModel(messages, temperature, options = {}) {
     max_tokens: maxTokens,
   }
 
-  // Only include thinking field if model supports it
+  // Note: glm-4.5-flash does not support thinking; keep disabled to avoid errors.
+// If you switch to glm-4.6+ or glm-5.x, you can set ZAI_THINKING_TYPE=enabled.
   if (thinkingType && thinkingType !== 'disabled') {
     body.thinking = { type: thinkingType }
   }
