@@ -31,3 +31,8 @@ docs
 
 # Local lambda context regeneration output (committed version lives in repo)
 # lambda/bonds-context.md IS committed
+# Environment files (contain secrets)
+.env
+.env.*
+.env.local
+.env.production

@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useRef, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-import { CHAT_API_URL } from '../../config'
+import { CHAT_API_URL, CHAT_TOKEN } from '../../config'
 
 type Message = {
   role: 'user' | 'assistant'
@@ -97,7 +97,10 @@ export default function Chatbot() {
     try {
       const response = await fetch(CHAT_API_URL, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          ...(CHAT_TOKEN ? { Authorization: `Bearer ${CHAT_TOKEN}` } : {}),
+        },
         body: JSON.stringify({ question: trimmed, history }),
       })
       const data = await parseResponse(response)

@@ -9,7 +9,68 @@ const ZAI_MAX_TOKENS = Number(process.env.ZAI_MAX_TOKENS || 1500)
 const ZAI_RELEVANCE_MODEL = process.env.ZAI_RELEVANCE_MODEL || ZAI_MODEL
 const ZAI_RELEVANCE_THINKING_TYPE = process.env.ZAI_RELEVANCE_THINKING_TYPE || 'disabled'
 const ZAI_RELEVANCE_MAX_TOKENS = Number(process.env.ZAI_RELEVANCE_MAX_TOKENS || 300)
-const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '*').split(',').map((s) => s.trim())
+const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '*')
+  .split(',')
+  .map((s) => s.trim())
+  .filter(Boolean)
+
+// Shared secret token (also embedded in frontend). This is obfuscation, not
+// real security — for real protection, put CloudFront in front of the Lambda
+// and inject this header via Origin Request Policy so the browser never sees it.
+const CHAT_TOKEN = process.env.CHAT_TOKEN || ''
+
+// Simple in-memory rate limiter (per IP). Resets on cold start, but deters
+// casual abuse. For real rate limiting, use AWS WAF.
+const RATE_LIMIT_WINDOW_MS = 60_000 // 1 minute
+const RATE_LIMIT_MAX = 20 // requests per IP per window
+const rateLimitMap = new Map() // ip -> { count, resetAt }
+
+function checkRateLimit(ip) {
+  const now = Date.now()
+  const entry = rateLimitMap.get(ip)
+  if (!entry || now > entry.resetAt) {
+    rateLimitMap.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS })
+    return { allowed: true, remaining: RATE_LIMIT_MAX - 1 }
+  }
+  entry.count += 1
+  return {
+    allowed: entry.count <= RATE_LIMIT_MAX,
+    remaining: Math.max(0, RATE_LIMIT_MAX - entry.count),
+  }
+}
+
+function getClientIp(event) {
+  const headers = event?.headers || {}
+  return (
+    headers['X-Forwarded-For']?.split(',')[0]?.trim() ||
+    headers['x-forwarded-for']?.split(',')[0]?.trim() ||
+    event?.requestContext?.http?.sourceIp ||
+    'unknown'
+  )
+}
+
+function isAllowedOrigin(event) {
+  if (ALLOWED_ORIGINS.includes('*')) return true
+  const headers = event?.headers || {}
+  const origin = headers.origin || headers.Origin || ''
+  const referer = headers.referer || headers.Referer || ''
+  if (origin && ALLOWED_ORIGINS.includes(origin)) return true
+  if (referer && ALLOWED_ORIGINS.some((o) => referer.startsWith(o))) return true
+  return false
+}
+
+function isTokenValid(event) {
+  if (!CHAT_TOKEN) return true // skip if not configured
+  const headers = event?.headers || {}
+  const auth = headers.authorization || headers.Authorization || ''
+  const provided = auth.replace(/^Bearer\s+/i, '').trim()
+  if (provided.length !== CHAT_TOKEN.length) return false
+  let diff = 0
+  for (let i = 0; i < CHAT_TOKEN.length; i++) {
+    diff |= provided.charCodeAt(i) ^ CHAT_TOKEN.charCodeAt(i)
+  }
+  return diff === 0
+}
 
 // Relevance judge is the LLM. No keyword heuristic — the LLM sees a context summary
 // and decides based on the actual question intent.
@@ -229,6 +290,27 @@ exports.handler = async (event) => {
 
   if (method !== 'POST') {
     return response(405, { error: 'Method not allowed' })
+  }
+
+  // Layer 1: Origin/Referer check
+  if (!isAllowedOrigin(event)) {
+    return response(403, { error: 'Forbidden: origin not allowed' })
+  }
+
+  // Layer 2: Shared token check (only enforced if CHAT_TOKEN is configured)
+  if (!isTokenValid(event)) {
+    return response(401, { error: 'Unauthorized: invalid or missing token' })
+  }
+
+  // Layer: Rate limit per IP
+  const clientIp = getClientIp(event)
+  const rate = checkRateLimit(clientIp)
+  if (!rate.allowed) {
+    return response(429, {
+      error: 'Too many requests',
+      retryAfterSeconds: 60,
+      remaining: 0,
+    })
   }
 
   if (!process.env.ZAI_API_KEY) {
