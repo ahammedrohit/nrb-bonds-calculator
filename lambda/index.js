@@ -68,16 +68,15 @@ const RELEVANCE_SYSTEM_PROMPT = [
   'Example irrelevant output: {"relevant":false,"reason":"asks unrelated coding question"}',
 ].join('\n')
 
+// CORS headers are handled by the Lambda Function URL config itself.
+// Do NOT set Access-Control-* headers here, or browsers will see duplicate
+// values and reject the response with "multiple allow origin values".
 function response(statusCode, body, isStream = false) {
-  const headers = {
-    'Content-Type': isStream ? 'text/event-stream' : 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'POST, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
-  }
   return {
     statusCode,
-    headers,
+    headers: {
+      'Content-Type': isStream ? 'text/event-stream' : 'application/json',
+    },
     body: isStream ? body : JSON.stringify(body),
   }
 }
@@ -211,20 +210,10 @@ function cleanAnswer(text) {
 
 exports.handler = async (event) => {
   const method = event?.requestContext?.http?.method || event?.httpMethod || 'GET'
-  const origin = event?.headers?.origin || event?.headers?.Origin || ''
-  const allowOrigin = ALLOWED_ORIGINS.includes('*') || (origin && ALLOWED_ORIGINS.includes(origin)) ? (ALLOWED_ORIGINS.includes('*') ? '*' : origin) : ALLOWED_ORIGINS[0]
-
-  // CORS preflight
+  // CORS preflight is handled by the Lambda Function URL Cors config.
+  // Just return 204 with no CORS headers — Function URL adds them.
   if (method === 'OPTIONS') {
-    return {
-      statusCode: 204,
-      headers: {
-        'Access-Control-Allow-Origin': allowOrigin,
-        'Access-Control-Allow-Methods': 'POST, OPTIONS',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
-      body: '',
-    }
+    return { statusCode: 204, body: '' }
   }
 
   if (method !== 'POST') {
@@ -327,3 +316,4 @@ exports.handler = async (event) => {
     })
   }
 }
+
