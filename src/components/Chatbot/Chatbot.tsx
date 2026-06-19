@@ -43,7 +43,6 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([])
   const [question, setQuestion] = useState('')
   const [loading, setLoading] = useState(false)
-  // Show "Thinking" first (model is reasoning), then flip to "Generating" after ~1.2s
   const [thinkingState, setThinkingState] = useState<ThinkingState>('idle')
   const [error, setError] = useState('')
   const endRef = useRef<HTMLDivElement | null>(null)
@@ -60,18 +59,6 @@ export default function Chatbot() {
       if (thinkingTimerRef.current) clearTimeout(thinkingTimerRef.current)
     }
   }, [])
-
-  async function parseResponse(response: Response) {
-    const rawText = await response.text()
-    try {
-      return rawText ? JSON.parse(rawText) : {}
-    } catch {
-      if (!response.ok) {
-        throw new Error(rawText.slice(0, 180) || 'Server returned an invalid response')
-      }
-      throw new Error('Server returned an invalid response')
-    }
-  }
 
   async function submitQuestion(nextQuestion: string) {
     const trimmed = nextQuestion.trim()
@@ -103,22 +90,123 @@ export default function Chatbot() {
         },
         body: JSON.stringify({ question: trimmed, history }),
       })
-      const data = await parseResponse(response)
+
       if (!response.ok) {
-        throw new Error(data?.error || data?.details || 'Chat request failed')
+        const errText = await response.text().catch(() => '')
+        let errMsg = `Chat request failed (HTTP ${response.status})`
+        try {
+          const errJson = JSON.parse(errText)
+          errMsg = errJson?.error || errMsg
+        } catch {
+          if (errText) errMsg = errText.slice(0, 180)
+        }
+        throw new Error(errMsg)
       }
-      if (thinkingTimerRef.current) clearTimeout(thinkingTimerRef.current)
-      setThinkingState('idle')
-      setMessages((current) => [
-        ...current,
-        { role: 'assistant', content: data.answer || 'No answer returned.' },
-      ])
+
+      // --- SSE streaming parser ---
+      // The Lambda streams Server-Sent Events:
+      //   data: {"type":"thinking"}           → model is reasoning
+      //   data: {"type":"start"}              → content is about to start
+      //   data: {"type":"token","content":…}  → one content chunk
+      //   data: {"type":"done"}               → end
+      //   data: {"type":"error",…}            → error during stream
+      const reader = response.body?.getReader()
+      if (!reader) throw new Error('Streaming not supported by browser')
+
+      const decoder = new TextDecoder()
+      let buffer = ''
+      let assistantContent = ''
+      let streamDone = false
+
+      // Add an empty assistant message that we'll fill as tokens arrive
+      setMessages((current) => [...current, { role: 'assistant', content: '' }])
+
+      while (!streamDone) {
+        const { done, value } = await reader.read()
+        if (done) break
+
+        buffer += decoder.decode(value, { stream: true })
+
+        // SSE events are separated by blank lines
+        const lines = buffer.split('\n')
+        buffer = lines.pop() || ''
+
+        for (const line of lines) {
+          const trimmedLine = line.trim()
+          if (!trimmedLine.startsWith('data:')) continue
+
+          const data = trimmedLine.slice(5).trim()
+          if (!data || data === '[DONE]') continue
+
+          let event
+          try {
+            event = JSON.parse(data)
+          } catch {
+            continue
+          }
+
+          switch (event.type) {
+            case 'thinking':
+              // Model is reasoning — keep showing the thinking bubble
+              break
+            case 'start':
+              // Content is about to stream — hide thinking bubble
+              if (thinkingTimerRef.current) clearTimeout(thinkingTimerRef.current)
+              setThinkingState('idle')
+              break
+            case 'token':
+              // Append content chunk to the assistant message
+              if (thinkingTimerRef.current) clearTimeout(thinkingTimerRef.current)
+              setThinkingState('idle')
+              assistantContent += event.content || ''
+              // Update the last message in state with the accumulated content
+              setMessages((current) => {
+                const updated = [...current]
+                updated[updated.length - 1] = {
+                  role: 'assistant',
+                  content: assistantContent,
+                }
+                return updated
+              })
+              break
+            case 'done':
+              streamDone = true
+              break
+            case 'error':
+              streamDone = true
+              throw new Error(event.message || 'Streaming error')
+          }
+        }
+      }
+
+      // If we never got any content, remove the empty assistant message
+      if (!assistantContent) {
+        setMessages((current) => {
+          const updated = [...current]
+          if (updated.length > 0 && updated[updated.length - 1].role === 'assistant' && !updated[updated.length - 1].content) {
+            updated.splice(updated.length - 1, 1)
+          }
+          return updated
+        })
+      }
     } catch (requestError) {
+      // Remove the user message on error
+      setMessages((current) => {
+        const updated = [...current]
+        // Remove empty assistant message if it was added
+        if (updated.length > 0 && updated[updated.length - 1].role === 'assistant' && !updated[updated.length - 1].content) {
+          updated.splice(updated.length - 1, 1)
+        }
+        // Remove the user message too
+        if (updated.length > 0 && updated[updated.length - 1].role === 'user') {
+          updated.splice(updated.length - 1, 1)
+        }
+        return updated
+      })
+      setError(requestError instanceof Error ? requestError.message : 'Chat request failed')
+    } finally {
       if (thinkingTimerRef.current) clearTimeout(thinkingTimerRef.current)
       setThinkingState('idle')
-      setError(requestError instanceof Error ? requestError.message : 'Chat request failed')
-      setMessages((current) => current.slice(0, -1))
-    } finally {
       setLoading(false)
     }
   }
