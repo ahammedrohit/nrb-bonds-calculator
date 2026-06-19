@@ -2,7 +2,7 @@ const fs = require('fs')
 const path = require('path')
 
 const BONDS_CONTEXT = fs.readFileSync(path.join(__dirname, 'bonds-context.md'), 'utf8')
-const ZAI_MODEL = process.env.ZAI_MODEL || 'glm-4.5-flash'
+const ZAI_MODEL = process.env.ZAI_MODEL || 'glm-4.7-flash'
 const ZAI_API_URL = `${process.env.ZAI_BASE_URL || 'https://api.z.ai/api/coding/paas/v4'}/chat/completions`
 const ZAI_THINKING_TYPE = process.env.ZAI_THINKING_TYPE || 'disabled'
 const ZAI_MAX_TOKENS = Number(process.env.ZAI_MAX_TOKENS || 1500)
